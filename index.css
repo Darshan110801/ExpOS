@@ -1,0 +1,112 @@
+body {
+  font-family: "Roboto Slab", serif;
+  background-color: lightcyan;
+}
+.dropdown-item,
+.dropdown-menu {
+  font-weight: bold;
+  color: wheat !important;
+  background-color: blueviolet;
+}
+.main-content {
+}
+.navbar {
+  color: white !important;
+  background-color: blueviolet !important;
+  filter: brightness(150%);
+}
+.nav-link,
+.navbar-brand {
+  color: wheat !important;
+  filter: brightness(150%) !important;
+}
+.using {
+  background-color: blueviolet;
+  width: 100vw;
+}
+#policy {
+  color: white;
+}
+.line {
+  border: 2px solid #007bff;
+}
+.entries {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-row {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  border: 1px solid black;
+}
+.header-data {
+  display: flex;
+  flex-direction: row;
+  height: 75px;
+  border: 1px solid black;
+}
+.data-row .process,
+.data-row .arrival-time,
+.data-row .burst-time {
+  display: flex;
+  border: 1px solid black;
+  flex-basis: 33.33333%;
+}
+.col-header {
+  display: flex;
+  flex-basis: 33.33333%;
+  border: 1px solid black;
+  justify-content: center;
+  background-color: #007bff;
+}
+.col-header h4 {
+  margin-top: 15px;
+  color: white;
+}
+.ip {
+  height: 100%;
+  width: 100%;
+}
+input {
+  text-align: center;
+}
+.btn {
+  background-color: #007bff;
+}
+.add-row-button,
+.submit-button {
+  display: flex;
+  justify-content: center;
+}
+#add-row,
+#remove-row {
+  border-radius: 100%;
+}
+.message {
+  color: red;
+}
+.process {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: yellowgreen;
+}
+.process h5 {
+  margin-top: 15px;
+  color: black;
+}
+.hr-entries {
+  border: 2px solid blueviolet;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.page-footer {
+  background-color: blueviolet;
+}
+.all-info {
+  height: 500px;
+  background-color: darkblue;
+  margin: 5%;
+}
