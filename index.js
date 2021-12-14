@@ -1,16 +1,41 @@
 import fifo from "./fifo.js";
 import display_graphically from "./display.js";
+import sjf from "./sjf.js";
 console.log("Hello World");
 let html_entries = document.querySelector(".entries");
 let js_entries = [];
 let cur_id = 0;
+let cur_theme = "dark";
 
 const policies = ["FIFO", "SJF", "SRTF", "RR", "MLFQ", "Priority Based"];
 
 let policy = "FIFO";
 
-let policy_selectors = [...document.querySelectorAll(".dropdown-item")];
+let policy_selectors = [...document.querySelectorAll(".policy-selector")];
 
+let theme_selectors = {
+  playground: {
+    dark: "playground",
+    "info-dark": "info-playground",
+    "dark-primary": "playground-primary",
+    "body-dark": "body-playground",
+    "time-title-dark": "time-title-playground",
+    "border-dark": "border-playground",
+    "processwise-dark": "processwise-playground",
+    "net-results-dark": "net-results-playground",
+  },
+  dark: {
+    playground: "dark",
+    "info-playground": "info-dark",
+    "playground-primary": "dark-primary",
+    "body-playground": "body-dark",
+    "time-title-playground": "time-title-dark",
+    "border-playground": "border-dark",
+    "processwise-playground": "processwise-dark",
+    "net-results-playground": "net-results-dark",
+  },
+};
+document.querySelector(".all-info").style = "display:none;";
 function apply_to_tag(tag, specifications) {
   for (let specification_name in specifications) {
     tag[specification_name] = specifications[specification_name];
@@ -42,6 +67,40 @@ function createDataRow(cur_id) {
 
   return div;
 }
+function toggle_theme(name) {
+  if (name == cur_theme) return;
+  let theme_eles = [...document.querySelectorAll(".theme-sel")];
+
+  if (cur_theme == "dark") {
+    cur_theme = "playground";
+    for (let i = 0; i < theme_eles.length; i++) {
+      let classes = [...theme_eles[i].classList];
+      for (let j = 0; j < classes.length; j++) {
+        if (Object.keys(theme_selectors.playground).includes(classes[j])) {
+          classes[j] = theme_selectors.playground[classes[j]];
+        }
+      }
+      theme_eles[i].classList = classes.join(" ");
+    }
+  } else if (cur_theme == "playground") {
+    cur_theme = "dark";
+    for (let i = 0; i < theme_eles.length; i++) {
+      let classes = [...theme_eles[i].classList];
+      for (let j = 0; j < classes.length; j++) {
+        if (Object.keys(theme_selectors.dark).includes(classes[j])) {
+          classes[j] = theme_selectors.dark[classes[j]];
+          break;
+        }
+      }
+      theme_eles[i].classList = classes.join(" ");
+    }
+  }
+}
+[...document.querySelectorAll(".theme")].map((theme_button, index) => {
+  theme_button.addEventListener("click", (e) => {
+    toggle_theme(e.currentTarget.innerHTML.toLowerCase());
+  });
+});
 for (let i = 0; i < 3; i++) {
   cur_id++;
   html_entries.appendChild(createDataRow(cur_id));
@@ -112,6 +171,9 @@ document.querySelector(".submit-button").addEventListener("click", () => {
         break;
       case "SJF":
         console.log(policy);
+        let sjffied_data = sjf(info);
+        console.log(sjffied_data);
+        display_graphically(sjffied_data);
         console.log(info);
         break;
       case "SRTF":
