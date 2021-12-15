@@ -2,6 +2,7 @@ import fifo from "./fifo.js";
 import display_graphically from "./display.js";
 import sjf from "./sjf.js";
 import srtf from "./srtf.js";
+import rr from "./rr.js";
 console.log("Hello World");
 let html_entries = document.querySelector(".entries");
 let js_entries = [];
@@ -143,11 +144,9 @@ document.getElementById("remove-row").addEventListener("click", () => {
 console.log(document.querySelector(".arrival-time .ip").value.length);
 
 let info = [];
-document.querySelector(".submit-button").addEventListener("click", () => {
-  let data_rows = [...document.querySelectorAll(".data-row")];
-  info = [];
-  let allOK = true;
-  document.querySelector(".message").innerHTML = "";
+
+function checkAllOk(data_rows) {
+  allOK = true;
   let input_checker = (data_row) => {
     let process_name = data_row.querySelector(".process .ip").innerHTML;
     let arrival_time = parseInt(
@@ -177,7 +176,14 @@ document.querySelector(".submit-button").addEventListener("click", () => {
   for (let data_row of data_rows) {
     input_checker(data_row);
   }
-  if (allOK) {
+}
+
+function execute() {
+  let data_rows = [...document.querySelectorAll(".data-row")];
+  info = [];
+  document.querySelector(".message").innerHTML = "";
+
+  if (checkAllOk(data_rows, info)) {
     switch (policy) {
       case "FIFO":
         console.log(policy);
@@ -208,7 +214,9 @@ document.querySelector(".submit-button").addEventListener("click", () => {
               ? 5
               : parseInt(tq_input_tag.querySelector("input").value),
         };
-        console.log(obj_to_pass);
+        let rrfied_data = rr(obj_to_pass);
+        console.log(rrfied_data);
+        display_graphically(rrfied_data);
         break;
       case "MLFQ":
         console.log(policy);
@@ -220,4 +228,5 @@ document.querySelector(".submit-button").addEventListener("click", () => {
         break;
     }
   }
-});
+}
+document.querySelector(".submit-button").addEventListener("click", execute);
