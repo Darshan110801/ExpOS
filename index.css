@@ -152,12 +152,12 @@ input {
 }
 .timeline {
   height: 200px;
-  width: 1000px;
+
   display: flex;
   flex-direction: row;
   background-color: transparent;
   margin-bottom: 50px;
-  overflow-x: scroll;
+  overflow-x: auto !important;
 }
 .calculations {
   display: flex;
