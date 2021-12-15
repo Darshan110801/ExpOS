@@ -156,7 +156,7 @@ input {
   flex-direction: row;
   background-color: transparent;
   margin-bottom: 50px;
-  flex-wrap: wrap !important;
+  overflow-x: scroll;
 }
 .calculations {
   display: flex;
