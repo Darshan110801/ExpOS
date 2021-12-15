@@ -35,6 +35,12 @@
 .info-dark {
   color: #007bff !important;
 }
+.tq-dark {
+  color: #007bff !important;
+}
+.tq-playground {
+  color: #121050;
+}
 .info-playground {
   color: wheat !important;
 }

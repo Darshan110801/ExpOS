@@ -1,6 +1,7 @@
 import fifo from "./fifo.js";
 import display_graphically from "./display.js";
 import sjf from "./sjf.js";
+import srtf from "./srtf.js";
 console.log("Hello World");
 let html_entries = document.querySelector(".entries");
 let js_entries = [];
@@ -12,7 +13,16 @@ const policies = ["FIFO", "SJF", "SRTF", "RR", "MLFQ", "Priority Based"];
 let policy = "FIFO";
 
 let policy_selectors = [...document.querySelectorAll(".policy-selector")];
+let tq_input_tag = document.querySelector(".time-quanta-ip");
+tq_input_tag.style.display = "none";
 
+tq_input_tag
+  .querySelector("input")
+  .addEventListener("change", (e) =>
+    e.currentTarget.value < 1
+      ? (e.currentTarget.value = 1)
+      : (e.currentTarget.value = e.currentTarget.value)
+  );
 let theme_selectors = {
   playground: {
     dark: "playground",
@@ -23,6 +33,7 @@ let theme_selectors = {
     "border-dark": "border-playground",
     "processwise-dark": "processwise-playground",
     "net-results-dark": "net-results-playground",
+    "tq-dark": "tq-playground",
   },
   dark: {
     playground: "dark",
@@ -33,6 +44,7 @@ let theme_selectors = {
     "border-playground": "border-dark",
     "processwise-playground": "processwise-dark",
     "net-results-playground": "net-results-dark",
+    "tq-playground": "tq-dark",
   },
 };
 document.querySelector(".all-info").style = "display:none;";
@@ -109,6 +121,10 @@ console.log(policy_selectors);
 policy_selectors.map((selector, index) => {
   selector.addEventListener("click", () => {
     policy = policies[index];
+    policies[index] == "RR"
+      ? (tq_input_tag.style.display = "")
+      : (tq_input_tag.style.display = "none");
+
     document.getElementById("policy").innerHTML =
       "Scheduling Policy - " + policies[index];
   });
@@ -179,10 +195,20 @@ document.querySelector(".submit-button").addEventListener("click", () => {
       case "SRTF":
         console.log(policy);
         console.log(info);
+        let srtffied_data = srtf(info);
+        console.log(srtffied_data);
+        display_graphically(srtffied_data);
         break;
       case "RR":
         console.log(policy);
-        console.log(info);
+        let obj_to_pass = {
+          info: [...info],
+          time_quanta:
+            tq_input_tag.querySelector("input").value == ""
+              ? 5
+              : parseInt(tq_input_tag.querySelector("input").value),
+        };
+        console.log(obj_to_pass);
         break;
       case "MLFQ":
         console.log(policy);
