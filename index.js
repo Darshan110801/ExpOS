@@ -125,7 +125,7 @@ policy_selectors.map((selector, index) => {
     policies[index] == "RR"
       ? (tq_input_tag.style.display = "")
       : (tq_input_tag.style.display = "none");
-
+    execute();
     document.getElementById("policy").innerHTML =
       "Scheduling Policy - " + policies[index];
   });
@@ -146,7 +146,7 @@ console.log(document.querySelector(".arrival-time .ip").value.length);
 let info = [];
 
 function checkAllOk(data_rows) {
-  allOK = true;
+  let allOK = true;
   let input_checker = (data_row) => {
     let process_name = data_row.querySelector(".process .ip").innerHTML;
     let arrival_time = parseInt(
@@ -176,6 +176,7 @@ function checkAllOk(data_rows) {
   for (let data_row of data_rows) {
     input_checker(data_row);
   }
+  return allOK;
 }
 
 function execute() {
