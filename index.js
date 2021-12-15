@@ -67,8 +67,8 @@ function createDataRow(cur_id) {
   div.innerHTML = `<div class='process'><h5  class='ip text-center'>${
     "P" + cur_id
   }</h5></div>
-      <div class='arrival-time'><input type='number' class='ip' allign ='center' placeholder='Arrival time in sec.'></div>
-      <div class='burst-time'><input type='number' class='ip' allign ='center' placeholder='Burst time in sec.'></div>`;
+      <div class='arrival-time'><input type='number' class='ip' allign ='center' placeholder=''></div>
+      <div class='burst-time'><input type='number' class='ip' allign ='center' placeholder=''></div>`;
 
   [...div.querySelectorAll(".arrival-time .ip,.burst-time .ip")].map((ele) => {
     ele.addEventListener("change", () => {
