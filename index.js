@@ -48,6 +48,7 @@ let theme_selectors = {
     "tq-playground": "tq-dark",
   },
 };
+toggle_theme("playground");
 document.querySelector(".all-info").style = "display:none;";
 function apply_to_tag(tag, specifications) {
   for (let specification_name in specifications) {
@@ -81,7 +82,7 @@ function createDataRow(cur_id) {
   return div;
 }
 function toggle_theme(name) {
-  if (name == cur_theme) return;
+  if (name === cur_theme) return;
   let theme_eles = [...document.querySelectorAll(".theme-sel")];
 
   if (cur_theme == "dark") {
@@ -109,9 +110,14 @@ function toggle_theme(name) {
     }
   }
 }
+
 [...document.querySelectorAll(".theme")].map((theme_button, index) => {
   theme_button.addEventListener("click", (e) => {
-    toggle_theme(e.currentTarget.innerHTML.toLowerCase());
+    if (e.currentTarget.innerHTML.toLowerCase() === "light")
+      toggle_theme("playground");
+    else {
+      toggle_theme("dark");
+    }
   });
 });
 for (let i = 0; i < 3; i++) {
