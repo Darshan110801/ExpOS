@@ -152,6 +152,7 @@ input {
 }
 .timeline {
   height: 200px;
+  width: 1000px;
   display: flex;
   flex-direction: row;
   background-color: transparent;
